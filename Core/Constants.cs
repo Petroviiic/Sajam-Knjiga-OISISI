@@ -13,5 +13,6 @@ namespace Core
     {
         public const string AuthorsFile = "authors.txt";
         public const string BooksFile = "books.txt";
+        public const string WishlistFile = "wishlist.txt";
     }
 }
