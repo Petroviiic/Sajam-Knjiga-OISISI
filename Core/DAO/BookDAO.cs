@@ -39,5 +39,43 @@ namespace Core.DAO
         {
             return books;
         }
+
+        //Lana
+        private int GenerateId()
+        {
+            return books.Count == 0 ? 1 : books.Max(b => b.Id) + 1;
+        }
+
+        public Book Add(Book book)
+        {
+            book.Id = GenerateId();
+            books.Add(book);
+            storage.Save(books);
+            return book;
+        }
+
+
+        public Book? Update(Book book)
+        {
+            Book? oldBook = GetById(book.Id);
+
+            if (oldBook == null)
+                return null;
+
+            oldBook.Title = book.Title;
+            oldBook.ISBN = book.ISBN;
+            oldBook.Genre = book.Genre;
+            oldBook.YearPublished = book.YearPublished;
+            oldBook.Price = book.Price;
+            oldBook.PageNumber = book.PageNumber;
+            oldBook.PublisherId = book.PublisherId;
+            oldBook.AuthorIds = new List<int>(book.AuthorIds);
+
+
+            storage.Save(books);
+            return oldBook;
+        }
+
+
     }
 }

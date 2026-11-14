@@ -14,10 +14,10 @@ namespace Core.DAO
     /*
     * VisitorDAO – Data Access Object
     * --------------------------------
-    * Ova klasa je zadužena za:
+    * Ova klasa sluzi za:
     *  - upravljanje listom Visitor objekata
     *  - dodavanje, izmenu, brisanje i prikaz posetilaca
-    *  - čuvanje i učitavanje podataka iz fajla pomoću Storage klase
+    *  - cuvanje i ucitavanje podataka iz fajla pomocu Storage klase
     */
     public class VisitorDAO : IVisitorDAO
     {
