@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Storage.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,7 +11,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Core.Models
 {
-    public class Author
+    public class Author : ISerializable
     {
         public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
@@ -24,6 +25,7 @@ namespace Core.Models
         public string IdCardNumber { get; set; } = string.Empty;
         public int YearsOfExperience { get; set; }
 
+        public List<Book> Books { get; set; } = new List<Book>();
         public Author()
         {
             
