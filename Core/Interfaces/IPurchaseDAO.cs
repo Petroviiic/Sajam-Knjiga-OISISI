@@ -14,5 +14,6 @@ namespace Core.Interfaces
         Purchase? GetById(int Id);
         List<Purchase> GetAll(); //prikaz kupljenih knjiga
 
+        Purchase Add(Purchase purchase);
     }
 }
