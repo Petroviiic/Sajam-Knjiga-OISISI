@@ -11,19 +11,25 @@ namespace Core.DAO
 {
     public class PurchaseDAO : IPurchaseDAO
     {
-        private readonly Storage<Purchase> _storage;
-        private readonly List<Purchase> _purchases;
+        private readonly Storage<Purchase> storage;
+        private readonly List<Purchase> purchases;
         public PurchaseDAO()
         {
-            _storage = new Storage<Purchase>("purchases.txt");
-            _purchases = _storage.Load();
+            storage = new Storage<Purchase>(FileConstants.PurchasedFile);
+            purchases = storage.Load();
         }
 
         private int GenerateId()
         {
-            return _purchases.Count == 0 ? 1 : _purchases.Max(p => p.Id) + 1;
+            return purchases.Count == 0 ? 1 : purchases.Max(p => p.Id) + 1;
         }
-
+        public Purchase Add(Purchase purchase)
+        {
+            purchase.Id = GenerateId();
+            purchases.Add(purchase);
+            storage.Save(purchases);
+            return purchase;
+        }
 
         public Purchase? Update(Purchase purchase)
         {
@@ -38,7 +44,7 @@ namespace Core.DAO
             existingPurchase.Rating = purchase.Rating;
             existingPurchase.Comment = purchase.Comment;
 
-            _storage.Save(_purchases);
+            storage.Save(purchases);
             return existingPurchase;
         }
 
@@ -49,19 +55,19 @@ namespace Core.DAO
             if (purchase == null)
                 return null;
 
-            _purchases.Remove(purchase);
-            _storage.Save(_purchases);
+            purchases.Remove(purchase);
+            storage.Save(purchases);
             return purchase;
         }
 
         public Purchase? GetById(int Id)
         {
-            return _purchases.Find(p => p.Id == Id);
+            return purchases.Find(p => p.Id == Id);
         }
 
         public List<Purchase> GetAll()
         {
-            return _purchases;
+            return purchases;
         }
 
         
