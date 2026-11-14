@@ -15,8 +15,10 @@ namespace Core.Models
         public string City { get; set; } = string.Empty;
         public string Country { get; set; } = string.Empty;
 
+        public Address()
+        {
 
-
+        }
         public Address(string s, int n, string ci, string co)
         {
             StreetName = s;
