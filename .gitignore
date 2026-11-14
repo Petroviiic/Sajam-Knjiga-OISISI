@@ -1,1 +1,4 @@
 .vs/
+
+ConsoleAppClient/obj/Debug/net8.0
+Core/obj/Debug/net8.0
