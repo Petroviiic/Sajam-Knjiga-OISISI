@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\ConsoleAppClient\\ConsoleAppClient.csproj": {}
+    "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\ConsoleAppClient\\ConsoleAppClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\ConsoleAppClient\\ConsoleAppClient.csproj": {
+    "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\ConsoleAppClient\\ConsoleAppClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\ConsoleAppClient\\ConsoleAppClient.csproj",
+        "projectUniqueName": "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\ConsoleAppClient\\ConsoleAppClient.csproj",
         "projectName": "ConsoleAppClient",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\ConsoleAppClient\\ConsoleAppClient.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\ConsoleAppClient\\obj\\",
+        "projectPath": "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\ConsoleAppClient\\ConsoleAppClient.csproj",
+        "packagesPath": "C:\\Users\\edu2\\.nuget\\packages\\",
+        "outputPath": "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\ConsoleAppClient\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\edu2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,10 +30,11 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\Core\\Core.csproj"
+              "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\Core\\Core.csproj": {
+                "projectPath": "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\Core\\Core.csproj"
               }
             }
           }
@@ -43,10 +48,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "imports": [
             "net461",
@@ -64,21 +71,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\Core\\Core.csproj": {
+    "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\Core\\Core.csproj",
+        "projectUniqueName": "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\Fakultet\\Treca godina\\OISISI\\Sajam Knjiga\\Core\\obj\\",
+        "projectPath": "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\edu2\\.nuget\\packages\\",
+        "outputPath": "D:\\treca_god_faks\\OISISI\\Sajam-Knjiga-OISISI\\Core\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\edu2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -90,6 +101,7 @@
         },
         "frameworks": {
           "net8.0": {
+            "framework": "net8.0",
             "targetAlias": "net8.0",
             "projectReferences": {}
           }
@@ -103,10 +115,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "imports": [
             "net461",
@@ -124,7 +138,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.402/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
