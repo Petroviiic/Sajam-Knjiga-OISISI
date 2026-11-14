@@ -10,6 +10,7 @@ namespace Core.Interfaces
     public interface IWishlistDAO
     {
         bool RemoveBookFromWishlist(int visitorId, int bookId);
+        bool AddBookToWishlist(int visitorId, int bookId);
         List<Wishlist> GetAll();
     }
 }

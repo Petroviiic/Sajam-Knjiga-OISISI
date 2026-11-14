@@ -36,5 +36,21 @@ namespace Core.DAO
         {
             return wishlist;
         }
+
+        public bool AddBookToWishlist(int visitorId, int bookId)
+        {
+            var existing = wishlist
+                .FirstOrDefault(vb => vb.VisitorId == visitorId && vb.BookId == bookId);
+
+            if (existing != null)
+                return false;
+
+            Wishlist objekat = new Wishlist(visitorId, bookId);
+            wishlist.Add(objekat);
+            storage.Save(wishlist);
+
+            return true;
+        }
+
     }
 }
