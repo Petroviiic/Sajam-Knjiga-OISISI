@@ -52,5 +52,10 @@ namespace Core.DAO
         {
             return authorBookRelation;
         }
+
+        public List<AuthorBookRelation> GetByAuthorId(int authorId)
+        {
+            return authorBookRelation.Where(r => r.AuthorId == authorId).ToList();
+        }
     }
 }

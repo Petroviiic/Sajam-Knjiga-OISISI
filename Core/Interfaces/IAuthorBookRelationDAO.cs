@@ -13,5 +13,6 @@ namespace Core.Interfaces
         bool Remove(int authorId, int bookId);
         List<AuthorBookRelation> GetAll();
 
+        List<AuthorBookRelation> GetByAuthorId(int id);
     }
 }
