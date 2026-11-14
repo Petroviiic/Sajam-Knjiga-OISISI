@@ -14,8 +14,7 @@ namespace Core.Storage
      * klasu za konverziju objekta u string i obrnuto.
      */
 
-    // ovaj kod je preuzet iz primera sa vezbi i prilagodjen je potrebama projekta
-    // izvor: Termn 3 - Kolekcije i serijalizacija - CrudExample.zip
+    // ovaj kod je preuzet sa materijala sa vjezbi: Termin 3 - Kolekcije i serijalizacija - CrudExample.zip
     public class Storage<T> where T : ISerializable, new()
     {
         // puna putanja do fajla
@@ -38,15 +37,12 @@ namespace Core.Storage
                 Directory.CreateDirectory(directory);
             }
 
-            // ukoliko fajl ne postoji napravi novi fajl i
-            // zatvori stream za pisanje u fajl
             if (!File.Exists(_filePath))
             {
                 FileStream fs = File.Create(_filePath);
                 fs.Close();
             }
 
-            // ucitaj sve linije i deserijalizuj
             IEnumerable<string> lines = File.ReadLines(_filePath);
             List<T> objects = _serializer.FromCSV(lines);
 
@@ -55,7 +51,6 @@ namespace Core.Storage
 
         public void Save(List<T> objects)
         {
-            // osiguraj da direktorijum postoji
             string? directory = Path.GetDirectoryName(_filePath);
 
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
@@ -63,7 +58,6 @@ namespace Core.Storage
                 Directory.CreateDirectory(directory);
             }
             
-            // serijalizuj objekte
             string serializedObjects = _serializer.ToCSV(objects);
 
             using (StreamWriter streamWriter = new StreamWriter(_filePath))
