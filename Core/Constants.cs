@@ -8,6 +8,7 @@ namespace Core
 {
     public static class FileConstants
     {
-        public const string AuthorsFile = "authors.csv";
+        public const string AuthorsFile = "authors.txt";
+        public const string BooksFile = "books.txt";
     }
 }
