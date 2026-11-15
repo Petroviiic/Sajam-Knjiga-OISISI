@@ -15,6 +15,7 @@ namespace Core.Services
         private AuthorBookRelationDAO authorBookRelationDAO;
         private BookDAO bookDAO;
         private AddressDAO addressDAO;
+        private PublisherDAO publisherDAO;
 
         public AuthorService()
         {
@@ -22,6 +23,7 @@ namespace Core.Services
             authorBookRelationDAO = new AuthorBookRelationDAO();
             addressDAO = new AddressDAO();
             bookDAO = new BookDAO();
+            publisherDAO = new PublisherDAO();
         }
 
 
@@ -45,6 +47,88 @@ namespace Core.Services
             foreach (var a in authors)
                 loadAuthorRelations(a);
         }
+
+
+        public Author Add(Author author)
+        {
+            validate(author);
+
+            if (author.Address != null && author.Address.Id == 0)
+            {
+                var saved = addressDAO.Add(author.Address);
+                author.Address = saved;
+                author.AddressId = saved.Id;
+            }
+
+            return authorDAO.Add(author);
+        }
+
+        public Author? Update(Author author)
+        {
+            validate(author);
+
+            if (author.Address != null)
+            {
+                if (author.Address.Id == 0)
+                {
+                    var saved = addressDAO.Add(author.Address);
+                    author.Address = saved;
+                }
+                else
+                {
+                    addressDAO.Update(author.Address);
+                }
+                author.AddressId = author.Address.Id;
+            }
+
+            return authorDAO.Update(author);
+        }
+
+        public Author? Remove(int id)
+        {
+            // uklanja veze sa knjigama
+            var relations = authorBookRelationDAO.GetByAuthorId(id);
+            foreach (var rel in relations)
+            {
+                Book? book = bookDAO.GetById(rel.BookId);
+                if (book != null && book.AuthorIds.Remove(id))
+                    bookDAO.Update(book);
+
+                authorBookRelationDAO.Remove(rel.AuthorId, rel.BookId);
+            }
+
+            foreach (Publisher publisher in publisherDAO.GetAll())
+            {
+                bool changed = publisher.AuthorIds.Remove(id);
+
+                if (publisher.ChiefEditorId == id)
+                {
+                    publisher.ChiefEditorId = 0;
+                    changed = true;
+                }
+
+                if (changed)
+                    publisherDAO.Update(publisher);
+            }
+
+            return authorDAO.Remove(id);
+        }
+
+        public Author? GetById(int id)
+        {
+            var author = authorDAO.GetById(id);
+            if (author != null)
+                loadAuthorRelations(author);
+            return author;
+        }
+
+        public List<Author> GetAll()
+        {
+            var authors = authorDAO.GetAll();
+            LoadAllRelations(authors);
+            return authors;
+        }
+
 
         // #8.19
         // Jedna rijec = prezime; dve reci odvojene zarezom = prezime, ime
@@ -83,6 +167,23 @@ namespace Core.Services
             LoadAllRelations(results);
 
             return results;
+        }
+
+
+
+        private void validate(Author author)
+        {
+            if (string.IsNullOrWhiteSpace(author.FirstName))
+                throw new Exception("Ime je obavezno.");
+
+            if (string.IsNullOrWhiteSpace(author.LastName))
+                throw new Exception("Prezime je obavezno.");
+
+            if (string.IsNullOrWhiteSpace(author.IdCardNumber))
+                throw new Exception("Broj licne karte je obavezan.");
+
+            if (author.YearsOfExperience < 0)
+                throw new Exception("Godine iskustva ne mogu biti negativne.");
         }
     }
 }

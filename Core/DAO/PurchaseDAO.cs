@@ -13,6 +13,7 @@ namespace Core.DAO
     {
         private readonly Storage<Purchase> storage;
         private readonly List<Purchase> purchases;
+
         public PurchaseDAO()
         {
             storage = new Storage<Purchase>(FileConstants.PurchasedFile);
@@ -78,6 +79,9 @@ namespace Core.DAO
                 .ToList();
         }
 
-
+        public List<Purchase> GetByBook(int bookId)
+        {
+            return purchases.Where(p => p.BookId == bookId).ToList();
+        }
     }
 }

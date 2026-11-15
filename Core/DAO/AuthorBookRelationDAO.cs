@@ -12,8 +12,8 @@ namespace Core.DAO
     public class AuthorBookRelationDAO: IAuthorBookRelationDAO
     {
 
-        private readonly Storage<AuthorBookRelation> storage;
-        private readonly List<AuthorBookRelation> authorBookRelation;
+        private Storage<AuthorBookRelation> storage;
+        private List<AuthorBookRelation> authorBookRelation;
 
         public AuthorBookRelationDAO()
         {
@@ -56,6 +56,11 @@ namespace Core.DAO
         public List<AuthorBookRelation> GetByAuthorId(int authorId)
         {
             return authorBookRelation.Where(r => r.AuthorId == authorId).ToList();
+        }
+
+        public List<AuthorBookRelation> GetByBookId(int bookId)
+        {
+            return authorBookRelation.Where(r => r.BookId == bookId).ToList();
         }
     }
 }

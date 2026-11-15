@@ -59,5 +59,11 @@ namespace Core.DAO
             storage.Save(wishlist);
         }
 
+
+        public void RemoveByBookId(int bookId)
+        {
+            wishlist.RemoveAll(vb => vb.BookId == bookId);
+            storage.Save(wishlist);
+        }
     }
 }
