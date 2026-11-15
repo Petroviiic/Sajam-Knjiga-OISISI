@@ -21,6 +21,37 @@ namespace Core.Services
         }
 
 
+        public bool AddAuthorToBook(int bookId, int authorId)
+        {
+            Book? book = _bookDAO.GetById(bookId);
+            if (book == null)
+                return false;
+
+            bool added = _authorBookDAO.Add(new AuthorBookRelation(authorId, bookId));
+
+            if (!book.AuthorIds.Contains(authorId))
+            {
+                book.AuthorIds.Add(authorId);
+                _bookDAO.Update(book);
+            }
+
+            return added;
+        }
+
+        public bool RemoveAuthorFromBook(int bookId, int authorId)
+        {
+            bool removed = _authorBookDAO.Remove(authorId, bookId);
+
+            Book? book = _bookDAO.GetById(bookId);
+
+            if (book != null && book.AuthorIds.Remove(authorId))
+                _bookDAO.Update(book);
+
+            return removed;
+        }
+
+
+
         //  8.21 prikaz knjiga koje je autor napisao 
         public List<AuthorBookRelation> GetByAuthorId(int authorId)
         {
