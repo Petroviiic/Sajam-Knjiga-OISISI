@@ -86,8 +86,7 @@ namespace Core.Services
         // ================= DELETE =================
         public Visitor? RemoveVisitor(int id)
         {
-            // Voditi racuna o referencijalnim zavisnostima 8.12
-            // (kupovine i lista zelja se brisu pre posetioca)
+            // kupovine i lista zelja se brisu pre posetioca
             var purchases = purchaseDAO.GetByVisitor(id);
             foreach (var p in purchases)
                 purchaseDAO.Remove(p.Id);
@@ -169,7 +168,6 @@ namespace Core.Services
 
 
 
-
         //validacija!!!!!
         private void ValidateVisitor(Visitor visitor, bool isUpdate = false)
         {
@@ -201,5 +199,28 @@ namespace Core.Services
         }
 
 
+
+
+
+
+
+
+        public List<int> GetAuthorIdsOnVisitorWishlist(int visitorId)
+        {
+            var wishlist = wishlistDAO.GetByVisitorId(visitorId);
+            var bookIds = wishlist.Select(vb => vb.BookId).ToList();
+
+            var authorIds = new HashSet<int>();
+            foreach (int bookId in bookIds)
+            {
+                Book? book = bookDAO.GetById(bookId);
+                if (book != null)
+                {
+                    foreach (int authorId in book.AuthorIds)
+                        authorIds.Add(authorId);
+                }
+            }
+            return authorIds.ToList();
+        }
     }
 }
