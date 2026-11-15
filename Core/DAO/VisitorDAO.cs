@@ -93,5 +93,53 @@ namespace Core.DAO
         {
             return _visitors.FirstOrDefault(v => v.MembershipCardNumber == cardNumber);
         }
+
+        //8.20. za paginaciju i sortiranje
+        public List<Visitor> GetAll(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
+        {
+            IEnumerable<Visitor> visitors = _visitors;
+
+            visitors = sortCriteria switch
+            {
+                "MembershipCardNumber" or "BrojKartice"
+                    => sortDirection == SortDirection.Ascending
+                        ? visitors.OrderBy(v => v.MembershipCardNumber)       // leksikografski
+                        : visitors.OrderByDescending(v => v.MembershipCardNumber),
+
+                "FirstName" or "Ime"
+                    => sortDirection == SortDirection.Ascending
+                        ? visitors.OrderBy(v => v.FirstName)
+                        : visitors.OrderByDescending(v => v.FirstName),
+
+                "LastName" or "Prezime"
+                    => sortDirection == SortDirection.Ascending
+                        ? visitors.OrderBy(v => v.LastName)
+                        : visitors.OrderByDescending(v => v.LastName),
+
+                "MembershipYear" or "GodinaClanstva"
+                    => sortDirection == SortDirection.Ascending
+                        ? visitors.OrderBy(v => v.MembershipYear)             // numericko
+                        : visitors.OrderByDescending(v => v.MembershipYear),
+
+                "Status"
+                    => sortDirection == SortDirection.Ascending
+                        ? visitors.OrderBy(v => v.Status)
+                        : visitors.OrderByDescending(v => v.Status),
+
+                "AverageRating" or "ProsecnaOcena"
+                    => sortDirection == SortDirection.Ascending
+                        ? visitors.OrderBy(v => v.AverageRating)              // numericko
+                        : visitors.OrderByDescending(v => v.AverageRating),
+
+                _ => sortDirection == SortDirection.Ascending
+                        ? visitors.OrderBy(v => v.Id)
+                        : visitors.OrderByDescending(v => v.Id),
+            };
+
+            //8.20 Paginacija: do 16 entiteta po stranici
+            return visitors.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+
     }
 }
