@@ -13,5 +13,8 @@ namespace Core.Interfaces
         bool AddBookToWishlist(int visitorId, int bookId);
         List<Wishlist> GetAll();
         void RemoveByBookId(int bookId);
+
+
+        List<VisitorBook> GetByVisitorId(int visitrId);
     }
 }
