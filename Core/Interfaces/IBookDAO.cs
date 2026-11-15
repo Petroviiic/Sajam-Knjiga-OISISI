@@ -18,5 +18,7 @@ namespace Core.Interfaces
 
         List<Book> GetAll();
         List<Book> GetAll(int page, int pageSize, string sortCriteria, SortDirection sortDirection);
+
+        bool BookExists(int id);
     }
 }
