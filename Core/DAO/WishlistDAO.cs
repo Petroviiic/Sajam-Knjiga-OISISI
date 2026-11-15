@@ -51,7 +51,10 @@ namespace Core.DAO
 
             return true;
         }
-
+        public List<Wishlist> GetByVisitorId(int visitorId)
+        {
+            return wishlist.Where(r => r.VisitorId == visitorId).ToList();
+        }
 
         public void RemoveByVisitorId(int visitorId)
         {

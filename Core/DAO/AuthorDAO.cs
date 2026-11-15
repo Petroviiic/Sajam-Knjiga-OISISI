@@ -44,6 +44,29 @@ namespace Core.DAO
             return authors;
         }
 
+        public List<Author> GetAll(int page, int pageSize, string sortCriteria, SortDirection direction)
+        {
+            IEnumerable<Author> authors = this.authors;
+
+            authors = sortCriteria switch
+            {
+                "FirstName" or "Ime" => direction == SortDirection.Ascending 
+                                              ? authors.OrderBy(a => a.FirstName)
+                                              : authors.OrderByDescending(a => a.FirstName),
+                "LastName" or "Prezime" => direction == SortDirection.Ascending
+                                              ? authors.OrderBy(a => a.LastName)
+                                              : authors.OrderByDescending(a => a.LastName),
+                "Email" => direction == SortDirection.Ascending
+                                              ? authors.OrderBy(a => a.Email)
+                                              : authors.OrderByDescending(a => a.Email),
+                _ => direction == SortDirection.Ascending
+                                              ? authors.OrderBy(a => a.Id)
+                                              : authors.OrderByDescending(a => a.Id),
+            };
+
+            return authors.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
+
         public Author? Remove(int Id)
         {
             Author? author = GetById(Id);

@@ -14,5 +14,7 @@ namespace Core.Interfaces
         Author? Remove(int Id);
         Author? GetById(int Id);
         List<Author> GetAll();
+        List<Author> GetAll(int page, int pageSize, string sortCriteria, SortDirection direction);
+
     }
 }
