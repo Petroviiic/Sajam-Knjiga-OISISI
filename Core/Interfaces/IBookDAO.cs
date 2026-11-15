@@ -14,6 +14,6 @@ namespace Core.Interfaces
         Book? GetById(int Id);
 
         List<Book> GetAll();
-
+        List<Book> GetAll(int page, int pageSize, string sortCriteria, SortDirection sortDirection);
     }
 }

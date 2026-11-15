@@ -76,6 +76,36 @@ namespace Core.DAO
             return oldBook;
         }
 
+        public List<Book> GetAll(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
+        {
+            IEnumerable<Book> _books = books;
+
+            // ISBN, naziv, cijena, godina izdanja, zanr
+            _books = sortCriteria switch
+            {
+                "ISBN" => sortDirection == SortDirection.Ascending
+                                                    ? _books.OrderBy(b => b.ISBN)
+                                                    : _books.OrderByDescending(b => b.ISBN),
+                "Title" or "Naziv" => sortDirection == SortDirection.Ascending
+                                                    ? _books.OrderBy(b => b.Title)
+                                                    : _books.OrderByDescending(b => b.Title),
+                "Price" or "Cijena" => sortDirection == SortDirection.Ascending
+                                                    ? _books.OrderBy(b => b.Price)         
+                                                    : _books.OrderByDescending(b => b.Price),
+                "YearPublished" or "Year" => sortDirection == SortDirection.Ascending
+                                                    ? _books.OrderBy(b => b.YearPublished) 
+                                                    : _books.OrderByDescending(b => b.YearPublished),
+                "Genre" or "Zanr" => sortDirection == SortDirection.Ascending
+                                                    ? _books.OrderBy(b => b.Genre)
+                                                    : _books.OrderByDescending(b => b.Genre),
+                _ => sortDirection == SortDirection.Ascending
+                                                    ? _books.OrderBy(b => b.Id)
+                                                    : _books.OrderByDescending(b => b.Id),
+            };
+
+
+            return _books.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        }
 
     }
 }

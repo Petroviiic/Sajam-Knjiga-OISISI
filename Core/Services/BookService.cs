@@ -1,4 +1,5 @@
 ﻿using Core.DAO;
+using Core.Interfaces;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,12 @@ namespace Core.Services
         {
             return bookDAO.GetAll();
         }
+
+        public List<Book> GetAll(int page, int pageSize, string sort, SortDirection dir)
+        {
+            return bookDAO.GetAll(page, pageSize, sort, dir);
+        }
+
 
         public List<Book> Search(string query)
         {
