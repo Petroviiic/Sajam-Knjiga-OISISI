@@ -14,11 +14,13 @@ namespace Core.Services
         private AuthorDAO authorDAO;
         private AuthorBookRelationDAO authorBookRelationDAO;
         private BookDAO bookDAO;
+        private AddressDAO addressDAO;
 
         public AuthorService()
         {
             authorDAO = new AuthorDAO();
             authorBookRelationDAO = new AuthorBookRelationDAO();
+            addressDAO = new AddressDAO();
             bookDAO = new BookDAO();
         }
 
