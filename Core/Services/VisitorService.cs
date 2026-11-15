@@ -201,10 +201,6 @@ namespace Core.Services
 
 
 
-
-
-
-
         public List<int> GetAuthorIdsOnVisitorWishlist(int visitorId)
         {
             var wishlist = wishlistDAO.GetByVisitorId(visitorId);
