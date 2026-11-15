@@ -62,8 +62,19 @@ namespace Core.Services
             return bookDAO.GetAll();
         }
 
+        public List<Book> Search(string query)
+        {
+            var books = bookDAO.GetAll();
 
-       
+            if (string.IsNullOrWhiteSpace(query))
+                return books;
+
+            string q = query.Trim().ToLower();
+
+            return books.Where(b => b.Title.ToLower().Contains(q) || b.ISBN.ToLower().Contains(q)).ToList();
+        }
+
+
         private void validate(Book book)
         {
             if (string.IsNullOrWhiteSpace(book.Title))
