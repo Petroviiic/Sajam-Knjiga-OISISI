@@ -129,6 +129,12 @@ namespace Core.Services
             return authors;
         }
 
+        public List<Author> GetAll(int page, int pageSize, string sort, SortDirection dir)
+        {
+            var authors = authorDAO.GetAll(page, pageSize, sort, dir);
+            LoadAllRelations(authors);
+            return authors;
+        }
 
         // #8.19
         // Jedna rijec = prezime; dve reci odvojene zarezom = prezime, ime
