@@ -245,5 +245,43 @@ namespace Core.Services
             }
             return authorIds.ToList();
         }
+
+        // 8.29: poredjenje posetilaca po dve knjige
+        public List<Visitor> GetVisitorsWithBothOnWishlist(int bookId1, int bookId2)
+        {
+            var wishlist = wishlistDAO.GetAll();
+
+            var visitorIds = wishlist
+                .Where(vb => vb.BookId == bookId1)
+                .Select(vb => vb.VisitorId)
+                .Intersect(
+                    wishlist
+                        .Where(vb => vb.BookId == bookId2)
+                        .Select(vb => vb.VisitorId)
+                );
+
+            return visitorIds
+                .Select(id => visitorDAO.GetById(id))
+                .Where(v => v != null)
+                .Cast<Visitor>()
+                .ToList();
+        }
+
+        public List<Visitor> GetVisitorsBoughtFirstNotSecond(int bookId1, int bookId2)
+        {
+            var allPurchases = purchaseDAO.GetAll();
+
+            var boughtFirst = allPurchases.Where(p => p.BookId == bookId1).Select(p => p.VisitorId).ToHashSet();
+            var boughtSecond = allPurchases.Where(p => p.BookId == bookId2).Select(p => p.VisitorId).ToHashSet();
+
+            return boughtFirst
+                .Except(boughtSecond)
+                .Select(id => visitorDAO.GetById(id))
+                .Where(v => v != null)
+                .Cast<Visitor>()
+                .ToList();
+        }
+
+
     }
 }
