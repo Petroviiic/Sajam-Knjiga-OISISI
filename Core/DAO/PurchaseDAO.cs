@@ -70,6 +70,14 @@ namespace Core.DAO
             return purchases;
         }
 
-        
+        // sve kupovine jednog posetioca
+        public List<Purchase> GetByVisitor(int visitorId)
+        {
+            return purchases
+                .Where(p => p.VisitorId == visitorId)
+                .ToList();
+        }
+
+
     }
 }

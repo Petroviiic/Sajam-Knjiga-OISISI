@@ -52,5 +52,12 @@ namespace Core.DAO
             return true;
         }
 
+
+        public void RemoveByVisitorId(int visitorId)
+        {
+            wishlist.RemoveAll(vb => vb.VisitorId == visitorId);
+            storage.Save(wishlist);
+        }
+
     }
 }
