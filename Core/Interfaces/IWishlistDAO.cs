@@ -15,6 +15,6 @@ namespace Core.Interfaces
         void RemoveByBookId(int bookId);
 
 
-        List<VisitorBook> GetByVisitorId(int visitrId);
+        List<Wishlist> GetByVisitorId(int visitrId);
     }
 }

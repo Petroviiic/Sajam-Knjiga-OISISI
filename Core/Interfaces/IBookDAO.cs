@@ -9,6 +9,9 @@ namespace Core.Interfaces
 {
     internal interface IBookDAO
     {
+        //CRUD operacije
+        Book Add(Book book);
+        Book? Update(Book book);
         Book? Remove(int Id);
 
         Book? GetById(int Id);

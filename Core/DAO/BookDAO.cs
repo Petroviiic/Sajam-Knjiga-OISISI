@@ -46,6 +46,12 @@ namespace Core.DAO
             return books.Count == 0 ? 1 : books.Max(b => b.Id) + 1;
         }
 
+
+        public bool BookExists(int id)
+        {
+            return books.Exists(b => b.Id == id);
+        }
+
         public Book Add(Book book)
         {
             book.Id = GenerateId();
@@ -76,6 +82,7 @@ namespace Core.DAO
             return oldBook;
         }
 
+        //drazen - sortiranje knjiga
         public List<Book> GetAll(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
             IEnumerable<Book> _books = books;

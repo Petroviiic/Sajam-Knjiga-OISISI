@@ -20,6 +20,7 @@ namespace Core.DAO
             wishlist = storage.Load();
         }
 
+        //REMOVE
         public bool RemoveBookFromWishlist(int visitorId, int bookId)
         {
             var existing = wishlist.FirstOrDefault(vb => vb.VisitorId == visitorId && vb.BookId == bookId);
@@ -37,6 +38,7 @@ namespace Core.DAO
             return wishlist;
         }
 
+        //ADD
         public bool AddBookToWishlist(int visitorId, int bookId)
         {
             var existing = wishlist
@@ -51,6 +53,7 @@ namespace Core.DAO
 
             return true;
         }
+
         public List<Wishlist> GetByVisitorId(int visitorId)
         {
             return wishlist.Where(r => r.VisitorId == visitorId).ToList();
@@ -68,5 +71,13 @@ namespace Core.DAO
             wishlist.RemoveAll(vb => vb.BookId == bookId);
             storage.Save(wishlist);
         }
+
+     
+        public List<Wishlist> GetByBookId(int bookId)
+        {
+            return wishlist.Where(r => r.BookId == bookId).ToList();
+        }
+
+
     }
 }

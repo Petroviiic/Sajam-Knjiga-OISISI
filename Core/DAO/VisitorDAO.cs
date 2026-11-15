@@ -94,6 +94,13 @@ namespace Core.DAO
             return _visitors.FirstOrDefault(v => v.MembershipCardNumber == cardNumber);
         }
 
+        //Pretraga i filtriranje
+        public bool VisitorExists(int id) //poziva se u WishlistService pri dodavanju knjige na listu zelja posetioca
+        {
+            return _visitors.Exists(v => v.Id == id);
+        }
+
+
         //8.20. za paginaciju i sortiranje
         public List<Visitor> GetAll(int page, int pageSize, string sortCriteria, SortDirection sortDirection)
         {
