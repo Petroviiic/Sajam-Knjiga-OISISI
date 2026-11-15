@@ -1,4 +1,14 @@
-.vs/
-
 ConsoleAppClient/obj/Debug/net8.0
 Core/obj/Debug/net8.0
+
+.vs/
+*.user
+*.suo
+
+**/bin/
+**/obj/
+
+**/project.assets.json
+**/project.nuget.cache
+*.nuget.g.props
+*.nuget.dgspec.json
