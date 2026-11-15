@@ -114,9 +114,5 @@ namespace Core.DAO
             return _books.Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        public bool BookExists(int id)
-        {
-            return books.Exists(b => b.Id == id);
-        }
     }
 }
