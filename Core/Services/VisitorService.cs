@@ -200,11 +200,34 @@ namespace Core.Services
 
 
 
+        //funkcionalnost 8.27 #autor_posetioci, prikazivanje posetilaca koji na svojoj listi zelja imaju bar jednu knjigu od tog autora
+        public List<Visitor> GetVisitorsWithAuthorOnWishlist(int authorId)
+        {
+            var bookIds = authorBookDAO.GetAll()
+                .Where(ab => ab.AuthorId == authorId)
+                .Select(ab => ab.BookId)
+                .Distinct()
+                .ToList();
+
+            var visitorIds = wishlistDAO.GetAll()
+                .Where(vb => bookIds.Contains(vb.BookId))
+                .Select(vb => vb.VisitorId)
+                .Distinct()
+                .ToList();
+
+            var visitors = visitorIds
+                .Select(id => visitorDAO.GetById(id))
+                .Where(v => v != null)
+                .Cast<Visitor>()
+                .ToList();
+
+            LoadRelations(visitors);
+
+            return visitors;
+        }
 
 
-
-
-
+        //8.28. #posetilac_autori
         public List<int> GetAuthorIdsOnVisitorWishlist(int visitorId)
         {
             var wishlist = wishlistDAO.GetByVisitorId(visitorId);
