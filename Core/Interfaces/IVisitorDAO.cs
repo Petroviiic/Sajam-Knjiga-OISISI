@@ -18,6 +18,9 @@ namespace Core.Interfaces
         Visitor? GetById(int Id);
         List<Visitor> GetAll();
 
+        //za paginaciju i sortiranje
+        List<Visitor> GetAll(int page, int pageSize, string sortCriteria, SortDirection sortDirection);
+
 
     }
 }
