@@ -17,7 +17,7 @@ namespace Core.DAO
 
         public PublisherDAO()
         {
-            storage = new Storage<Publisher>("publishers.txt");
+            storage = new Storage<Publisher>(FileConstants.PublishersFile);
             publishers = storage.Load();
         }
 
