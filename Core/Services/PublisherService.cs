@@ -1,4 +1,5 @@
 ﻿using Core.DAO;
+using Core.Interfaces;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -125,7 +126,30 @@ namespace Core.Services
                 .ToList();
         }
 
-      
+
+        //#postavljanje_sefa_izdavaca  Chief Editor 8.26 
+        public bool SetChiefEditor(int publisherId, int authorId)
+        {
+            Publisher? publisher = publisherDAO.GetById(publisherId);
+            if (publisher == null) return false;
+
+            Author? author = authorDAO.GetById(authorId);
+            if (author == null) return false;
+
+            // Validacija - minimum 5 godina iskustva
+            if (author.YearsOfExperience < 5)
+                throw new Exception(
+                    $"Autor '{author.FirstName} {author.LastName}' nema dovoljno iskustva. " +
+                    $"Potrebno je najmanje 5 godina, a autor ima {author.YearsOfExperience}.");
+
+            if (!getPublisherAuthorIds(publisher).Contains(authorId))
+                throw new Exception("Šef izdavača mora biti jedan od autora tog izdavača.");
+
+            publisher.ChiefEditorId = authorId;
+            publisherDAO.Update(publisher);
+            return true;
+        }
+
 
         private HashSet<int> getPublisherAuthorIds(Publisher publisher)
         {
