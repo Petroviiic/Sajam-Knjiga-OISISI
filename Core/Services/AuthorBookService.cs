@@ -50,6 +50,11 @@ namespace Core.Services
             return removed;
         }
 
+        //#uklanjanje_knjige_sa_autora
+        public bool RemoveBookFromAuthor(int bookId, int authorId)
+        {
+            return RemoveAuthorFromBook(bookId, authorId);
+        }
 
 
         //  8.21 prikaz knjiga koje je autor napisao 
