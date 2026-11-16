@@ -12,7 +12,7 @@ namespace Core.Services
     public class BookService
     {
         private readonly BookDAO bookDAO;
-        private readonly AuthorBookRelationDAO authorBookRelationDA0;
+        private readonly AuthorBookRelationDAO authorBookRelationDAO;
         private readonly PurchaseDAO purchaseDAO;
         private readonly WishlistDAO wishlistDAO;
         private readonly PublisherDAO publisherDAO;
@@ -20,7 +20,7 @@ namespace Core.Services
         public BookService()
         {
             bookDAO = new BookDAO();
-            authorBookRelationDA0 = new AuthorBookRelationDAO();
+            authorBookRelationDAO = new AuthorBookRelationDAO();
             purchaseDAO = new PurchaseDAO();
             wishlistDAO = new WishlistDAO();
             publisherDAO = new PublisherDAO();
@@ -33,9 +33,9 @@ namespace Core.Services
             if (book == null)
                 return null;
 
-            var relations = authorBookRelationDA0.GetByBookId(id);
+            var relations = authorBookRelationDAO.GetByBookId(id);
             foreach (var rel in relations)
-                authorBookRelationDA0.Remove(rel.AuthorId, rel.BookId);
+                authorBookRelationDAO.Remove(rel.AuthorId, rel.BookId);
 
             var purchases = purchaseDAO.GetByBook(id);
             foreach (var p in purchases)
