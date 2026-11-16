@@ -9,8 +9,9 @@ namespace ConsoleClient
         {
             AddressCLIController addressView = new(new AddressService());
             AuthorCLIController authorView = new(new AuthorService());
-            VisitorConsoleView visitorView = new(new VisitorService());
+            VisitorCLIController visitorView = new(new VisitorService());
             BookCLIController bookView = new(new BookService());
+            PublisherCLIController publisherView = new(new PublisherService());
 
 
             while (true)
@@ -35,6 +36,9 @@ namespace ConsoleClient
                     case "4":
                         bookView.RunMenu();
                         break;
+                    case "5":
+                        publisherView.RunMenu();
+                        break;
                     default:
                         System.Console.WriteLine("Unknown option.");
                         break;
@@ -51,6 +55,7 @@ namespace ConsoleClient
             System.Console.WriteLine("2: Authors");
             System.Console.WriteLine("3: Visitors");
             System.Console.WriteLine("4: Books");
+            System.Console.WriteLine("5: Publisher");
             System.Console.WriteLine("0: Exit");
             System.Console.Write("Choose: ");
         }
