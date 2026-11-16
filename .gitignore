@@ -14,3 +14,5 @@ Core/obj/Debug/net8.0
 *.nuget.dgspec.json
 /Core/obj
 /Core
+
+**/Data/*.txt
