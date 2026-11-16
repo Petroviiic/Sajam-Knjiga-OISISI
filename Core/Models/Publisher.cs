@@ -82,28 +82,6 @@ namespace Core.Models
                 $"Books count: {PublishedBookIds.Count}";
         }
 
-        /*
-        public void AddAuthor(int authorId)
-        {
-            if (!AuthorIds.Contains(authorId))
-                AuthorIds.Add(authorId);
-        }
 
-        public void AddBook(int bookId)
-        {
-            if (!PublishedBookIds.Contains(bookId))
-                PublishedBookIds.Add(bookId);
-        }
-
-        public void RemoveAuthor(int authorId)
-        {
-            AuthorIds.Remove(authorId);
-        }
-
-        public void RemoveBook(int bookId)
-        {
-            PublishedBookIds.Remove(bookId);
-        }
-        */
     }
 }

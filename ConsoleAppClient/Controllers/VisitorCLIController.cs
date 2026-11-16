@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleAppClient.Controllers
 {
-    public class VisitorConsoleView
+    public class VisitorCLIController
     {
         private readonly VisitorService _visitorService;
 
-        public VisitorConsoleView(VisitorService visitorService)
+        public VisitorCLIController(VisitorService visitorService)
         {
             _visitorService = visitorService;
         }
