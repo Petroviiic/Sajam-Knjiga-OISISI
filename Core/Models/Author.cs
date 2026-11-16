@@ -30,6 +30,27 @@ namespace Core.Models
         {
             
         }
+
+        public Author(int id, string fn, string ln, DateTime dob, Address? address, string ph, string em, string icn, int yearsExp)
+        {
+            Id = id;
+            FirstName = fn;
+            LastName = ln;
+            DateOfBirth = dob;
+            Address = address;
+            AddressId = address?.Id ?? 0;
+            Phone = ph;
+            Email = em;
+            IdCardNumber = icn;
+            YearsOfExperience = yearsExp;
+        }
+
+        public Author(string fn, string ln, DateTime dob, int addressId, string ph, string em, string icn, int yearsExp)
+            : this(0, fn, ln, dob, null, ph, em, icn, yearsExp)
+        {
+            AddressId = addressId;
+        }
+
         public void FromCSV(string[] values)
         {
             Id = int.Parse(values[0]);
