@@ -55,7 +55,7 @@ namespace Core.Models
 
         public override string ToString()
         {
-            return $"{StreetName} {Number}, {City}";
+            return $"id: {Id}; {StreetName} {Number}, {City}, {Country}";
         }
     }
 }
