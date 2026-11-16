@@ -34,8 +34,8 @@ namespace ConsoleAppClient.Controllers
         private void ShowMenu()
         {
             System.Console.WriteLine("\nVisitor menu:");
-            System.Console.WriteLine("1: Show all visitors");
-            System.Console.WriteLine("2: Add visitor");
+            System.Console.WriteLine("1: Add visitor");
+            System.Console.WriteLine("2: Show all visitors");
             System.Console.WriteLine("3: Update visitor");
             System.Console.WriteLine("4: Remove visitor");
             System.Console.WriteLine("0: Back");
@@ -45,8 +45,8 @@ namespace ConsoleAppClient.Controllers
         {
             switch (input)
             {
-                case "1": ShowAllVisitors(); break;
-                case "2": AddVisitor(); break;
+                case "1": AddVisitor(); break;
+                case "2": ShowAllVisitors(); break;
                 case "3": UpdateVisitor(); break;
                 case "4": RemoveVisitor(); break;
             }

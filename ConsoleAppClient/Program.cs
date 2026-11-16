@@ -12,7 +12,7 @@ namespace ConsoleClient
             VisitorCLIController visitorView = new(new VisitorService());
             BookCLIController bookView = new(new BookService());
             PublisherCLIController publisherView = new(new PublisherService());
-
+            PurchaseCLIController purchaseView = new(new PurchaseService());
 
             while (true)
             {
@@ -39,6 +39,9 @@ namespace ConsoleClient
                     case "5":
                         publisherView.RunMenu();
                         break;
+                    case "6":
+                        purchaseView.RunMenu();
+                        break;
                     default:
                         System.Console.WriteLine("Unknown option.");
                         break;
@@ -56,6 +59,7 @@ namespace ConsoleClient
             System.Console.WriteLine("3: Visitors");
             System.Console.WriteLine("4: Books");
             System.Console.WriteLine("5: Publisher");
+            System.Console.WriteLine("6: Purchase");
             System.Console.WriteLine("0: Exit");
             System.Console.Write("Choose: ");
         }
