@@ -38,7 +38,6 @@ namespace ConsoleAppClient.Controllers
             System.Console.WriteLine("2: Add visitor");
             System.Console.WriteLine("3: Update visitor");
             System.Console.WriteLine("4: Remove visitor");
-            System.Console.WriteLine("5: Show and sort visitors");
             System.Console.WriteLine("0: Back");
         }
 

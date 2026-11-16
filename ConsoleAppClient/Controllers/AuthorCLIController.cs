@@ -1,4 +1,4 @@
-﻿using ConsoleClient.Utils;
+﻿using ConsoleAppClient.Utils;
 using Core.Models;
 using Core.Services;
 using Core;
