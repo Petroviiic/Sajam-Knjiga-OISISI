@@ -8,14 +8,14 @@ using Core.Models;
 
 namespace Core.Services
 {
-    public class VisitorBookService
+    public class WishlistService
     {
         private WishlistDAO wishlistDAO;
         private VisitorDAO visitorDAO;
         private PurchaseDAO purchaseDAO;
         private BookDAO bookDAO;
 
-        public VisitorBookService()
+        public WishlistService()
         {
             wishlistDAO = new WishlistDAO();
             visitorDAO = new VisitorDAO();

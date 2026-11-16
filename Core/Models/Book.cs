@@ -24,7 +24,7 @@ namespace Core.Models
 
         public Book() 
         {
-            Console.Write("book : konstruktor bez parametara, implementiraj funkcionalnost");
+            
         }
 
         public Book(int id, string isbn, string title, string genre, int year, double price, int pagenum, int publisherid)

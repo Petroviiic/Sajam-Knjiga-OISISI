@@ -11,12 +11,14 @@ namespace Core.Services
         private readonly PurchaseDAO purchaseDAO;
         private readonly VisitorDAO visitorDAO;
         private readonly BookDAO bookDAO;
+        private WishlistDAO wishlistDAO;
 
         public PurchaseService()
         {
             purchaseDAO = new PurchaseDAO();
             visitorDAO = new VisitorDAO();
             bookDAO = new BookDAO();
+            wishlistDAO = new WishlistDAO();
         }
 
         private void validate(Purchase purchase)
@@ -49,7 +51,13 @@ namespace Core.Services
 
         public Purchase? Remove(int id)
         {
-            return purchaseDAO.Remove(id);
+            Purchase? removed = purchaseDAO.Remove(id);
+
+            if (removed != null)
+            {
+                wishlistDAO.AddBookToWishlist(removed.VisitorId, id);
+            }
+            return removed;
         }
 
         public Purchase? GetById(int id)
