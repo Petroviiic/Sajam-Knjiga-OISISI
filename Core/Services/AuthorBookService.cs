@@ -50,6 +50,18 @@ namespace Core.Services
             return removed;
         }
 
+        public void RemoveByBook(int bookId)
+        {
+            var relations = _authorBookDAO
+                .GetByBookId(bookId);
+
+            foreach (var rel in relations)
+            {
+                RemoveAuthorFromBook(rel.BookId, rel.AuthorId);
+            }
+        }
+
+
         //#uklanjanje_knjige_sa_autora
         public bool RemoveBookFromAuthor(int bookId, int authorId)
         {

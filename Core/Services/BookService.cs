@@ -26,6 +26,17 @@ namespace Core.Services
             publisherDAO = new PublisherDAO();
         }
 
+        public Book Add(Book book)
+        {
+            validate(book);
+            return bookDAO.Add(book);
+        }
+
+        public Book? Update(Book book)
+        {
+            validate(book);
+            return bookDAO.Update(book);
+        }
 
         public Book? Remove(int id)
         {

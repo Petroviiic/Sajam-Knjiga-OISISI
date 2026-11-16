@@ -39,12 +39,35 @@ namespace Core.Models
 
         // ================= CONSTRUCTORS =================
 
-        public Visitor()
-        {
-            Console.WriteLine("konstruktor bez parametara iz Visitor");
-        }
 
-        //dodaj konstruktor sa parametrima
+        public Visitor() : this(0, "", "", DateTime.MinValue, 0, "", "", "", 0, VisitorStatus.Regular, 0.0) { }
+
+        public Visitor(
+            int id,
+            string firstName,
+            string lastName,
+            DateTime dateOfBirth,
+            int addressId,
+            string phone,
+            string email,
+            string membershipCardNumber,
+            int membershipYear,
+            VisitorStatus status,
+            double averageRating)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Address = null;
+            AddressId = addressId;
+            Phone = phone;
+            Email = email;
+            MembershipCardNumber = membershipCardNumber;
+            MembershipYear = membershipYear;
+            Status = status;
+            AverageRating = averageRating;
+        }
 
 
         // ================= CSV SERIALIZATION =================
