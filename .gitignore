@@ -12,3 +12,5 @@ Core/obj/Debug/net8.0
 **/project.nuget.cache
 *.nuget.g.props
 *.nuget.dgspec.json
+/Core/obj
+/Core
