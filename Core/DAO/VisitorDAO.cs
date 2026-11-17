@@ -21,14 +21,10 @@ namespace Core.DAO
     */
     public class VisitorDAO : IVisitorDAO
     {
-        private readonly Storage<Visitor> _storage;
-        private readonly List<Visitor> _visitors;
+        private static readonly Storage<Visitor> _storage = new Storage<Visitor>(FileConstants.VisitorsFile);
+        private static readonly List<Visitor> _visitors = _storage.Load();
 
-        public VisitorDAO()
-        {
-            _storage = new Storage<Visitor>("visitors.txt");
-            _visitors = _storage.Load();
-        }
+        public VisitorDAO() { }
 
         public int GenerateId()
         {

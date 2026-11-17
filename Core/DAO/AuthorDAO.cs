@@ -12,14 +12,10 @@ namespace Core.DAO
 {
     public class AuthorDAO : IAuthorDAO
     {
-        private List<Author> authors;
-        private Storage<Author> storage;
+        private static readonly Storage<Author> storage = new Storage<Author>(FileConstants.AuthorsFile);
+        private static readonly List<Author> authors = storage.Load();
 
-        public AuthorDAO()
-        {
-            storage = new Storage<Author>(FileConstants.AuthorsFile);
-            authors = storage.Load();
-        }
+        public AuthorDAO() { }
 
         private int GenerateId()
         {
@@ -46,7 +42,7 @@ namespace Core.DAO
 
         public List<Author> GetAll(int page, int pageSize, string sortCriteria, SortDirection direction)
         {
-            IEnumerable<Author> authors = this.authors;
+            IEnumerable<Author> authors = AuthorDAO.authors;
 
             authors = sortCriteria switch
             {

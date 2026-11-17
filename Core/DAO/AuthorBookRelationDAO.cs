@@ -12,14 +12,10 @@ namespace Core.DAO
     public class AuthorBookRelationDAO: IAuthorBookRelationDAO
     {
 
-        private Storage<AuthorBookRelation> storage;
-        private List<AuthorBookRelation> authorBookRelation;
+        private static readonly Storage<AuthorBookRelation> storage = new Storage<AuthorBookRelation>(FileConstants.AuthorBookRelationFile);
+        private static readonly List<AuthorBookRelation> authorBookRelation = storage.Load();
 
-        public AuthorBookRelationDAO()
-        {
-            storage = new Storage<AuthorBookRelation>(FileConstants.AuthorBookRelationFile);
-            authorBookRelation = storage.Load();
-        }
+        public AuthorBookRelationDAO() { }
 
 
         public bool Add(AuthorBookRelation relation)

@@ -12,14 +12,10 @@ namespace Core.DAO
 {
     public class PublisherDAO : IPublisherDAO
     {
-        private readonly Storage<Publisher> storage;
-        private readonly List<Publisher> publishers;
+        private static readonly Storage<Publisher> storage = new Storage<Publisher>(FileConstants.PublishersFile);
+        private static readonly List<Publisher> publishers = storage.Load();
 
-        public PublisherDAO()
-        {
-            storage = new Storage<Publisher>(FileConstants.PublishersFile);
-            publishers = storage.Load();
-        }
+        public PublisherDAO() { }
 
         public int GenerateId()
         {

@@ -11,14 +11,10 @@ namespace Core.DAO
 {
     public class WishlistDAO :  IWishlistDAO
     {
-        private readonly List<Wishlist> wishlist;
-        private readonly Storage<Wishlist> storage;
+        private static readonly Storage<Wishlist> storage = new Storage<Wishlist>(FileConstants.WishlistFile);
+        private static readonly List<Wishlist> wishlist = storage.Load();
 
-        public WishlistDAO()
-        {
-            storage = new Storage<Wishlist>(FileConstants.WishlistFile);
-            wishlist = storage.Load();
-        }
+        public WishlistDAO() { }
 
         //REMOVE
         public bool RemoveBookFromWishlist(int visitorId, int bookId)

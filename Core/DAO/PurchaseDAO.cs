@@ -11,14 +11,10 @@ namespace Core.DAO
 {
     public class PurchaseDAO : IPurchaseDAO
     {
-        private readonly Storage<Purchase> storage;
-        private readonly List<Purchase> purchases;
+        private static readonly Storage<Purchase> storage = new Storage<Purchase>(FileConstants.PurchasedFile);
+        private static readonly List<Purchase> purchases = storage.Load();
 
-        public PurchaseDAO()
-        {
-            storage = new Storage<Purchase>(FileConstants.PurchasedFile);
-            purchases = storage.Load();
-        }
+        public PurchaseDAO() { }
 
         private int GenerateId()
         {

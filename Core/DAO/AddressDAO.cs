@@ -12,14 +12,12 @@ namespace Core.DAO
 {
     public class AddressDAO : IAddressDAO
     {
-        private readonly Storage<Address> storage;
-        private readonly List<Address> addresses;
+        
+        private static readonly Storage<Address> storage = new Storage<Address>(FileConstants.AddressesFile);
+        private static readonly List<Address> addresses = storage.Load();
 
-        public AddressDAO()
-        {
-            storage = new Storage<Address>("addresses.txt");
-            addresses = storage.Load();
-        }
+        public AddressDAO() { }
+
         private int GenerateId()
         {
             return addresses.Count == 0 ? 1 : addresses.Max(a => a.Id) + 1;
