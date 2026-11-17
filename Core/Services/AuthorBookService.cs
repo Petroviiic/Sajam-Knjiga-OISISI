@@ -78,14 +78,12 @@ namespace Core.Services
         //  8.22 dodavanje knjige autoru 
         public List<Book> GetAvailableBooksForAuthor(int authorId)
         {
-            BookDAO bookDAO = new BookDAO();
-
             var authorBookIds = _authorBookDAO
                 .GetByAuthorId(authorId)
                 .Select(ab => ab.BookId)
                 .ToHashSet();
 
-            return bookDAO.GetAll()
+            return _bookDAO.GetAll()
                 .Where(b => !authorBookIds.Contains(b.Id))
                 .ToList();
         }
