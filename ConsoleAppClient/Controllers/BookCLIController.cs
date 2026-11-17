@@ -61,14 +61,21 @@ namespace ConsoleAppClient.Controllers
 
         private void addBook()
         {
-            Book book = inputBook();
-            Book savedBook = bookService.Add(book);
+            try
+            {
+                Book book = inputBook();
+                Book savedBook = bookService.Add(book);
 
-            foreach (int authorId in savedBook.AuthorIds)
-                authorBookService.AddAuthorToBook(savedBook.Id, authorId);
+                foreach (int authorId in savedBook.AuthorIds)
+                    authorBookService.AddAuthorToBook(savedBook.Id, authorId);
 
-            publisherService.AddBook(savedBook.PublisherId, savedBook.Id);
-            System.Console.WriteLine("Book added.");
+                publisherService.AddBook(savedBook.PublisherId, savedBook.Id);
+                System.Console.WriteLine("Book added.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private void showAllBooks()
@@ -136,25 +143,33 @@ namespace ConsoleAppClient.Controllers
             }
 
             int oldPublisherId = existingBook.PublisherId;
-            Book book = inputBook();
-            book.Id = id;
 
-            Book? updatedBook = bookService.Update(book);
-            if (updatedBook == null)
+            try
             {
-                System.Console.WriteLine("Book not found.");
-                return;
+                Book book = inputBook();
+                book.Id = id;
+
+                Book? updatedBook = bookService.Update(book);
+                if (updatedBook == null)
+                {
+                    System.Console.WriteLine("Book not found.");
+                    return;
+                }
+
+                authorBookService.RemoveByBook(id);
+                foreach (int authorId in book.AuthorIds)
+                    authorBookService.AddAuthorToBook(id, authorId);
+
+                if (oldPublisherId != book.PublisherId)
+                    publisherService.RemoveBook(oldPublisherId, id);
+
+                publisherService.AddBook(book.PublisherId, id);
+                System.Console.WriteLine("Book updated.");
             }
-
-            authorBookService.RemoveByBook(id);
-            foreach (int authorId in book.AuthorIds)
-                authorBookService.AddAuthorToBook(id, authorId);
-
-            if (oldPublisherId != book.PublisherId)
-                publisherService.RemoveBook(oldPublisherId, id);
-
-            publisherService.AddBook(book.PublisherId, id);
-            System.Console.WriteLine("Book updated.");
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private int inputId()

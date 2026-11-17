@@ -196,6 +196,9 @@ namespace Core.Services
 
             if (emailExists)
                 throw new Exception("Email vec postoji.");
+
+            if (visitor.Address == null && addressDAO.GetById(visitor.AddressId) == null)
+                throw new Exception($"Adresa sa ID-jem {visitor.AddressId} ne postoji.");
         }
 
 

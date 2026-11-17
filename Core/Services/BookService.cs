@@ -16,6 +16,7 @@ namespace Core.Services
         private readonly PurchaseDAO purchaseDAO;
         private readonly WishlistDAO wishlistDAO;
         private readonly PublisherDAO publisherDAO;
+        private readonly AuthorDAO authorDAO;
 
         public BookService()
         {
@@ -24,6 +25,7 @@ namespace Core.Services
             purchaseDAO = new PurchaseDAO();
             wishlistDAO = new WishlistDAO();
             publisherDAO = new PublisherDAO();
+            authorDAO = new AuthorDAO();
         }
 
         public Book Add(Book book)
@@ -106,6 +108,18 @@ namespace Core.Services
 
             if (book.YearPublished < 1000 || book.YearPublished > DateTime.Now.Year)
                 throw new Exception("Godina izdanja nije ispravna.");
+
+            if (publisherDAO.GetById(book.PublisherId) == null)
+                throw new Exception($"Izdavac sa ID-jem {book.PublisherId} ne postoji.");
+
+            if (book.AuthorIds == null)
+                throw new Exception("Knjiga mora imati bar jednog autora.");
+
+            foreach (int authorId in book.AuthorIds)
+            {
+                if (authorDAO.GetById(authorId) == null)
+                    throw new Exception($"Autor sa ID-jem {authorId} ne postoji.");
+            }
         }
     }
 }

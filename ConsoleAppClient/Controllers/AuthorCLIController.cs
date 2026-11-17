@@ -74,9 +74,16 @@ namespace ConsoleAppClient.Controllers
 
         private void addAuthor()
         {
-            Author author = inputAuthor();
-            authorService.Add(author);
-            System.Console.WriteLine("Author added");
+            try
+            {
+                Author author = inputAuthor();
+                authorService.Add(author);
+                System.Console.WriteLine("Author added.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private Author inputAuthor()
@@ -112,17 +119,31 @@ namespace ConsoleAppClient.Controllers
         private void updateAuthor()
         {
             int id = inputId();
-            Author author = inputAuthor();
-            author.Id = id;
-
-            Author? updatedAuthor = authorService.Update(author);
-            if (updatedAuthor is null)
+            Author? existingAuthor = authorService.GetById(id);
+            if (existingAuthor is null)
             {
-                System.Console.WriteLine("Author not found");
+                System.Console.WriteLine("Author not found.");
                 return;
             }
 
-            System.Console.WriteLine("Author updated");
+            try
+            {
+                Author author = inputAuthor();
+                author.Id = id;
+
+                Author? updatedAuthor = authorService.Update(author);
+                if (updatedAuthor is null)
+                {
+                    System.Console.WriteLine("Author not found.");
+                    return;
+                }
+
+                System.Console.WriteLine("Author updated.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private int inputId()

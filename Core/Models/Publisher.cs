@@ -75,11 +75,18 @@ namespace Core.Models
 
         public override string ToString()
         {
-            return
-                $"Publisher [ID: {Id}, Code: {Code}, Name: {Name})\n" +
-                $"ChiefEditorId: {ChiefEditorId}\n" +
-                $"Authors count: {AuthorIds.Count}\n" +
-                $"Books count: {PublishedBookIds.Count}";
+            string authorsStr = AuthorIds != null && AuthorIds.Count > 0
+            ? string.Join(", ", AuthorIds)
+            : "None";
+
+            string booksStr = PublishedBookIds != null && PublishedBookIds.Count > 0
+                ? string.Join(", ", PublishedBookIds)
+                : "None";
+
+            return $"Publisher [ID: {Id}, Code: {Code}, Name: {Name}]\n" +
+                   $"ChiefEditorId: {ChiefEditorId}\n" +
+                   $"AuthorIds: [{authorsStr}]\n" +
+                   $"PublishedBookIds: [{booksStr}]";
         }
 
 

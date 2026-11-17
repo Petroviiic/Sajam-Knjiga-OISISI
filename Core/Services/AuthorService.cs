@@ -190,6 +190,9 @@ namespace Core.Services
 
             if (author.YearsOfExperience < 0)
                 throw new Exception("Godine iskustva ne mogu biti negativne.");
+
+            if (author.Address == null && addressDAO.GetById(author.AddressId) == null)
+                throw new Exception($"Adresa sa ID-jem {author.AddressId} ne postoji.");
         }
     }
 }
