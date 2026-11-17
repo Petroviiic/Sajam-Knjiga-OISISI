@@ -55,7 +55,7 @@ namespace Core.Services
 
             if (removed != null)
             {
-                wishlistDAO.AddBookToWishlist(removed.VisitorId, id);
+                wishlistDAO.AddBookToWishlist(removed.VisitorId, removed.Id);
             }
             return removed;
         }
