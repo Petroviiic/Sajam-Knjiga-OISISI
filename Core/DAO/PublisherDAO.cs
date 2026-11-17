@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Core.DAO
 {
@@ -19,9 +20,7 @@ namespace Core.DAO
 
         public int GenerateId()
         {
-            if (publishers.Count == 0)
-                return 0;
-            return publishers.Max(v => v.Id) + 1;
+            return publishers.Count == 0 ? 1 : publishers.Max(b => b.Id) + 1;
         }
 
         public Publisher Add(Publisher publisher)

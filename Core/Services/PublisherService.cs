@@ -39,7 +39,7 @@ namespace Core.Services
         {
             foreach (Book book in bookDAO.GetAll().Where(b => b.PublisherId == id))
             {
-                book.PublisherId = 0;
+                book.PublisherId = -1;
                 bookDAO.Update(book);
             }
 
