@@ -89,8 +89,11 @@ namespace Core.Models
 
         public override string ToString()
         {
+            string authorsStr = AuthorIds != null && AuthorIds.Count > 0 ? string.Join(", ", AuthorIds): "None";
+
             return $"Book [ID: {Id}, ISBN: {ISBN}, Title: {Title}, Genre: {Genre}, " +
-                   $"Year: {YearPublished}, Price: {Price:F2}, Pages: {PageNumber}, PublisherId: {PublisherId}]";
+                   $"Year: {YearPublished}, Price: {Price:F2}, Pages: {PageNumber}, " +
+                   $"PublisherId: {PublisherId}, AuthorIds: [{authorsStr}]]";
         }
     }
 }
