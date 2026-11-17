@@ -62,9 +62,16 @@ namespace ConsoleAppClient.Controllers
         }
         private void addAddress()
         {
-            Address address = inputAddress();
-            addressService.Add(address);
-            System.Console.WriteLine("Address added");
+            try
+            {
+                Address address = inputAddress();
+                addressService.Add(address);
+                System.Console.WriteLine("Address added.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private Address inputAddress()
@@ -98,16 +105,30 @@ namespace ConsoleAppClient.Controllers
         private void updateAddress()
         {
             int id = inputId();
-            Address address = inputAddress();
-            address.Id = id;
-            Address? updatedAddress = addressService.Update(address);
-            if (updatedAddress == null)
+            Address? existingAddress = addressService.GetById(id);
+            if (existingAddress is null)
             {
-                System.Console.WriteLine("Address not found");
+                System.Console.WriteLine("Address not found.");
                 return;
             }
+            try
+            {
+                Address address = inputAddress();
+                address.Id = id;
 
-            System.Console.WriteLine("Address updated");
+                Address? updatedAddress = addressService.Update(address);
+                if (updatedAddress is null)
+                {
+                    System.Console.WriteLine("Address not found.");
+                    return;
+                }
+
+                System.Console.WriteLine("Address updated.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }       
         }
 
         private int inputId()

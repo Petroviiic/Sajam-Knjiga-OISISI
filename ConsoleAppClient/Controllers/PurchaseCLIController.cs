@@ -80,27 +80,51 @@ namespace ConsoleAppClient.Controllers
 
         private void addPurchase()
         {
-            Purchase purchase = inputPurchase();
-            purchaseService.Add(purchase);
-            System.Console.WriteLine("Purchase added.");
+            try
+            {
+                Purchase purchase = inputPurchase();
+                purchaseService.Add(purchase);
+                System.Console.WriteLine("Purchase added.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
-
-        private void updatePurchase()
+        private int inputId()
         {
             System.Console.WriteLine("Enter purchase id:");
-            int id = ConsoleViewUtils.SafeInputInt();
-
-            Purchase purchase = inputPurchase();
-            purchase.Id = id;
-
-            Purchase? updated = purchaseService.Update(purchase);
-            if (updated == null)
+            return ConsoleViewUtils.SafeInputInt();
+        }
+        private void updatePurchase()
+        {
+            int id = inputId();
+            Purchase? existingPurchase = purchaseService.GetById(id); 
+            if (existingPurchase is null)
             {
                 System.Console.WriteLine("Purchase not found.");
                 return;
             }
 
-            System.Console.WriteLine("Purchase updated.");
+
+            try
+            {
+                Purchase purchase = inputPurchase();
+                purchase.Id = id;
+
+                Purchase? updated = purchaseService.Update(purchase);
+                if (updated is null)
+                {
+                    System.Console.WriteLine("Purchase not found.");
+                    return;
+                }
+
+                System.Console.WriteLine("Purchase updated.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private void removePurchase()

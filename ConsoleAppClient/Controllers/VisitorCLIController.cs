@@ -68,25 +68,46 @@ namespace ConsoleAppClient.Controllers
 
         private void AddVisitor()
         {
-            Visitor visitor = InputVisitor();
-            _visitorService.AddVisitor(visitor);
-            System.Console.WriteLine("Visitor added.");
+            try
+            {
+                Visitor visitor = InputVisitor();
+                _visitorService.AddVisitor(visitor);
+                System.Console.WriteLine("Visitor added.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private void UpdateVisitor()
         {
             int id = InputId();
-            Visitor visitor = InputVisitor();
-            visitor.Id = id;
-
-            Visitor? updated = _visitorService.UpdateVisitor(visitor);
-            if (updated == null)
+            Visitor? existingVisitor = _visitorService.GetById(id); 
+            if (existingVisitor is null)
             {
                 System.Console.WriteLine("Visitor not found.");
                 return;
             }
 
-            System.Console.WriteLine("Visitor updated.");
+            try
+            {
+                Visitor visitor = InputVisitor();
+                visitor.Id = id;
+
+                Visitor? updated = _visitorService.UpdateVisitor(visitor);
+                if (updated is null)
+                {
+                    System.Console.WriteLine("Visitor not found.");
+                    return;
+                }
+
+                System.Console.WriteLine("Visitor updated.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private void RemoveVisitor()

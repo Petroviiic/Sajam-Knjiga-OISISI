@@ -82,27 +82,49 @@ namespace ConsoleAppClient.Controllers
 
         private void AddPublisher()
         {
-            Publisher publisher = InputPublisher();
-            _publisherService.AddPublisher(publisher);
-            System.Console.WriteLine("Publisher added.");
+            try
+            {
+                Publisher publisher = InputPublisher();
+                _publisherService.AddPublisher(publisher);
+                System.Console.WriteLine("Publisher added.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
-
-        private void UpdatePublisher()
+        private int inputId()
         {
             System.Console.WriteLine("Enter publisher id:");
-            int id = ConsoleViewUtils.SafeInputInt();
-
-            Publisher publisher = InputPublisher();
-            publisher.Id = id;
-
-            Publisher? updated = _publisherService.UpdatePublisher(publisher);
-            if (updated == null)
+            return ConsoleViewUtils.SafeInputInt();
+        }
+        private void UpdatePublisher()
+        {
+            int id = inputId();
+            Publisher? existingPublisher = _publisherService.GetById(id);
+            if (existingPublisher is null)
             {
                 System.Console.WriteLine("Publisher not found.");
                 return;
             }
+            try
+            {
+                Publisher publisher = InputPublisher();
+                publisher.Id = id;
 
-            System.Console.WriteLine("Publisher updated.");
+                Publisher? updated = _publisherService.UpdatePublisher(publisher);
+                if (updated is null)
+                {
+                    System.Console.WriteLine("Publisher not found.");
+                    return;
+                }
+
+                System.Console.WriteLine("Publisher updated.");
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         private void RemovePublisher()
